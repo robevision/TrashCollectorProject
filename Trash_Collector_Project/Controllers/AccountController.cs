@@ -15,11 +15,13 @@ namespace Trash_Collector_Project.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        ApplicationDbContext context;
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
         public AccountController()
         {
+            context = new ApplicationDbContext();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
