@@ -6,14 +6,14 @@ using System.Web.Mvc;
 
 namespace Trash_Collector_Project.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
-        [Authorize]
         public ActionResult Index()
         {
             return View();
         }
-     
+       [Authorize(Roles = "Admin")]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
