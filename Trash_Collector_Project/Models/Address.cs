@@ -18,7 +18,6 @@ namespace Trash_Collector_Project.Models
         public string State { get; set; }
         [Display(Name = "Zip Code")]
         public int ZipCode { get; set; }
-
         [ForeignKey("Customer")]
         public string CustomerId { get; set; }
         public Customer Customer { get; set; }
