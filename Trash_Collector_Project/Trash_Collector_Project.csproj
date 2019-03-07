@@ -195,6 +195,14 @@
     <Compile Include="Migrations\201903071657039_PickupNowNullable.Designer.cs">
       <DependentUpon>201903071657039_PickupNowNullable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903072054364_DisplayNameForPickUpDay.cs" />
+    <Compile Include="Migrations\201903072054364_DisplayNameForPickUpDay.Designer.cs">
+      <DependentUpon>201903072054364_DisplayNameForPickUpDay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903072128278_DisplayNameAdditions.cs" />
+    <Compile Include="Migrations\201903072128278_DisplayNameAdditions.Designer.cs">
+      <DependentUpon>201903072128278_DisplayNameAdditions.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs" />
@@ -321,6 +329,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903071657039_PickupNowNullable.resx">
       <DependentUpon>201903071657039_PickupNowNullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903072054364_DisplayNameForPickUpDay.resx">
+      <DependentUpon>201903072054364_DisplayNameForPickUpDay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903072128278_DisplayNameAdditions.resx">
+      <DependentUpon>201903072128278_DisplayNameAdditions.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

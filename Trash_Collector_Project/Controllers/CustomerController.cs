@@ -36,7 +36,7 @@ namespace Trash_Collector_Project.Controllers
 
         // POST: Customer/Create
         [HttpPost]
-        public ActionResult Create([Bind(Include = "ID,FirstName,LastName,PickupDay")] Customer customer)
+        public ActionResult Create([Bind(Include = "FirstName,LastName,PickupDay")] Customer customer)
         {
             var user = User.Identity.GetUserId();
             customer.UserId = user;
