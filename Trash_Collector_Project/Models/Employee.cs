@@ -12,7 +12,8 @@ namespace Trash_Collector_Project.Models
         public int ID { get; set; }
         [Display(Name = "Zip Code")]
         public int ZipCode { get; set; }
-        [ForeignKey("User")]
-        public HashSet<string> UserId { get; set; }
+        [ForeignKey("ApplicationUser")]
+        public string UserId { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
     }
 }

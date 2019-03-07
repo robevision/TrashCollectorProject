@@ -21,8 +21,9 @@ namespace Trash_Collector_Project.Models
         public bool Paid { get; set; }
         public DateTime ExtraPickup { get; set; }
         public int PickupTotalFromMonth { get; set; }
-        [ForeignKey("User")]
-        public HashSet<string> UserId { get; set; }
+        [ForeignKey("ApplicationUser")]
+        public string UserId { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
 
     }
 }
