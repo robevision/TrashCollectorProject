@@ -44,19 +44,6 @@ namespace Trash_Collector_Project.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    //var pickup = context.Customers.Select(c => c.PickupDay).ToList();
-                    var pickupDayList = new SelectList(new List<SelectListItem>
-                    {
-                    new SelectListItem { Selected = true, Text = string.Empty, Value = "Undetermined" },
-                    new SelectListItem { Selected = true, Text = "Monday", Value = "Monday" },
-                    new SelectListItem { Selected = true, Text = "Tuesday", Value = "Tuesday" },
-                    new SelectListItem { Selected = true, Text = "Wednesday", Value = "Wednesday" },
-                    new SelectListItem { Selected = true, Text = "Thursday", Value = "Thursday" },
-                    new SelectListItem { Selected = true, Text = "Friday", Value = "Friday" },
-                    new SelectListItem { Selected = true, Text = "Saturday", Value = "Saturday" },
-                    new SelectListItem { Selected = true, Text = "Undetermined", Value = "Undetermined" },
-                    }).ToString();
-                    customer.PickupDay = pickupDayList;
                     context.Customers.Add(customer);
                     context.SaveChanges();
                     switch (customer.PickupDay)
