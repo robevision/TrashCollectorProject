@@ -25,6 +25,6 @@ namespace Trash_Collector_Project.Models
         [ForeignKey("ApplicationUser")]
         public string UserId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
-
+        
     }
 }
