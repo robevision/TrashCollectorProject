@@ -44,11 +44,50 @@ namespace Trash_Collector_Project.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    customer.Pickup = true; 
+                    //var pickup = context.Customers.Select(c => c.PickupDay).ToList();
+                    var pickupDayList = new SelectList(new List<SelectListItem>
+                    {
+                    new SelectListItem { Selected = true, Text = string.Empty, Value = "Undetermined" },
+                    new SelectListItem { Selected = true, Text = "Monday", Value = "Monday" },
+                    new SelectListItem { Selected = true, Text = "Tuesday", Value = "Tuesday" },
+                    new SelectListItem { Selected = true, Text = "Wednesday", Value = "Wednesday" },
+                    new SelectListItem { Selected = true, Text = "Thursday", Value = "Thursday" },
+                    new SelectListItem { Selected = true, Text = "Friday", Value = "Friday" },
+                    new SelectListItem { Selected = true, Text = "Saturday", Value = "Saturday" },
+                    new SelectListItem { Selected = true, Text = "Undetermined", Value = "Undetermined" },
+                    }).ToString();
+                    customer.PickupDay = pickupDayList;
                     context.Customers.Add(customer);
+                    context.SaveChanges();
+                    switch (customer.PickupDay)
+                    {
+                        case "Monday":
+                            customer.Pickup = true;
+                            break;
+                        case "Tuesday":
+                            customer.Pickup = true;
+                            break;
+                        case "Wednesday":
+                            customer.Pickup = true;
+                            break;
+                        case "Thursday":
+                            customer.Pickup = true;
+                            break;
+                        case "Friday":
+                            customer.Pickup = true;
+                            break;
+                        case "Saturday":
+                            customer.Pickup = true;
+                            break;
+                        case null:
+                            customer.Pickup = false;
+                            break;
+                        default:
+                            customer.Pickup = false;
+                            break;
+                    }
+                    context.SaveChanges();
                 }
-                // TODO: Add insert logic here
-
                 return RedirectToAction("Index");
             }
             catch
