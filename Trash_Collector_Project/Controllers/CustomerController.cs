@@ -1,14 +1,21 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Trash_Collector_Project.Models;
 
 namespace Trash_Collector_Project.Controllers
 {
     public class CustomerController : Controller
     {
+        public ApplicationDbContext context;
         // GET: Customer
+       public CustomerController()
+        {
+            context = new ApplicationDbContext();
+        }
         public ActionResult Index()
         {
             return View();
@@ -21,8 +28,11 @@ namespace Trash_Collector_Project.Controllers
         }
 
         // GET: Customer/Create
-        public ActionResult Create()
+        public ActionResult Create(Customer customer)
         {
+            var user = User.Identity.GetUserId();
+            customer.UserId = user;
+            ViewBag.ID = new SelectList(context.Customers);
             return View();
         }
 
