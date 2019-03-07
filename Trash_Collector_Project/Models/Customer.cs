@@ -15,6 +15,7 @@ namespace Trash_Collector_Project.Models
         public string FirstName { get; set; }
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
+        [Display(Name = "Garbage Day Preference")]
         public string PickupDay { get; set; }
         public bool? Pickup { get; set; }
         public DateTime StartBreak { get; set; }

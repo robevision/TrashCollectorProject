@@ -6,9 +6,7 @@ using System.Web.Mvc;
 
 namespace Trash_Collector_Project.Controllers
 {
-    [Authorize(Roles = "Admin")]
-    [Authorize(Roles = "Customer")]
-    [Authorize(Roles = "Employee")]
+    [Authorize]
     public class HomeController : Controller
     {
         public ActionResult Index()
