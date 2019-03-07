@@ -191,6 +191,10 @@
     <Compile Include="Migrations\201903071613531_NewPickupDayProperty.Designer.cs">
       <DependentUpon>201903071613531_NewPickupDayProperty.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903071657039_PickupNowNullable.cs" />
+    <Compile Include="Migrations\201903071657039_PickupNowNullable.Designer.cs">
+      <DependentUpon>201903071657039_PickupNowNullable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs" />
@@ -314,6 +318,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903071613531_NewPickupDayProperty.resx">
       <DependentUpon>201903071613531_NewPickupDayProperty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903071657039_PickupNowNullable.resx">
+      <DependentUpon>201903071657039_PickupNowNullable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
