@@ -41,6 +41,7 @@ namespace Trash_Collector_Project.Controllers
         {
             var user = User.Identity.GetUserId();
             customer.UserId = user;
+            address.CustomerId = customer.UserId;
             try
             {
                 if (ModelState.IsValid)
