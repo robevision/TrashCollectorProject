@@ -211,6 +211,10 @@
     <Compile Include="Migrations\201903081442544_IntDataTypeAddressMdl.Designer.cs">
       <DependentUpon>201903081442544_IntDataTypeAddressMdl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903081641023_AddressUnitNullable.cs" />
+    <Compile Include="Migrations\201903081641023_AddressUnitNullable.Designer.cs">
+      <DependentUpon>201903081641023_AddressUnitNullable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs" />
@@ -352,6 +356,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903081442544_IntDataTypeAddressMdl.resx">
       <DependentUpon>201903081442544_IntDataTypeAddressMdl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903081641023_AddressUnitNullable.resx">
+      <DependentUpon>201903081641023_AddressUnitNullable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
