@@ -215,6 +215,10 @@
     <Compile Include="Migrations\201903081641023_AddressUnitNullable.Designer.cs">
       <DependentUpon>201903081641023_AddressUnitNullable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903081825221_ExtraPickUpDisplayNameChange.cs" />
+    <Compile Include="Migrations\201903081825221_ExtraPickUpDisplayNameChange.Designer.cs">
+      <DependentUpon>201903081825221_ExtraPickUpDisplayNameChange.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs" />
@@ -359,6 +363,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903081641023_AddressUnitNullable.resx">
       <DependentUpon>201903081641023_AddressUnitNullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903081825221_ExtraPickUpDisplayNameChange.resx">
+      <DependentUpon>201903081825221_ExtraPickUpDisplayNameChange.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
