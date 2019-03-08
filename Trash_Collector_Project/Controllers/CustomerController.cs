@@ -97,19 +97,17 @@ namespace Trash_Collector_Project.Controllers
             var userId = User.Identity.GetUserId();
             var id = context.Customers.Where(c => c.UserId == userId).Select(c => c.ID).Single();
             customerAddress.Customer = context.Customers.Where(c => c.ID == id).Single();
-            customerAddress.Address = context.Addresses.Where(a => a.ID == id).Single();
-           
+            customerAddress.Address = context.Addresses.Where(a => a.CustomerId == id).Single();
             return View(customerAddress);
         }
 
         // POST: Customer/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, [Bind(Include = "ID,FirstName,LastName,PickupDay,Pickup")] Customer customer, Address address)
+        public ActionResult Edit(int id, [Bind(Include = "ID,FirstName,LastName,PickupDay,Pickup")] CustomerAddressViewModels customerAddress)
         {
             try
             {
-                context.Entry(customer).State = System.Data.Entity.EntityState.Modified;
-                context.Entry(address).State = System.Data.Entity.EntityState.Modified;
+                context.Entry(customerAddress).State = System.Data.Entity.EntityState.Modified;
                 context.SaveChanges();
               
                 return RedirectToAction("Index");

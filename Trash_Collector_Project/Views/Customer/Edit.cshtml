@@ -2,24 +2,143 @@
 
 @{
     ViewBag.Title = "Edit";
+    List <SelectListItem> pickupDayList = new List<SelectListItem>();
+    pickupDayList.Add(new SelectListItem() { Text = "Monday", Value = "Monday" });
+    pickupDayList.Add(new SelectListItem() { Text = "Tuesday", Value = "Tuesday" });
+    pickupDayList.Add(new SelectListItem() { Text = "Wednesday", Value = "Wednesday" });
+    pickupDayList.Add(new SelectListItem() { Text = "Thursday", Value = "Thursday" });
+    pickupDayList.Add(new SelectListItem() { Text = "Friday", Value = "Friday" });
+    pickupDayList.Add(new SelectListItem() { Text = "Saturday", Value = "Saturday" });
+    pickupDayList.Add(new SelectListItem() { Text = "Undetermined", Value = "Undetermined" });
+    List<SelectListItem> stateList = new List<SelectListItem>();
+    stateList.Add(new SelectListItem() { Text = "Alabama", Value = "AL" });
+    stateList.Add(new SelectListItem() { Text = "Alaska", Value = "AK" });
+    stateList.Add(new SelectListItem() { Text = "Arizona", Value = "AZ" });
+    stateList.Add(new SelectListItem() { Text = "Arkansas", Value = "AR" });
+    stateList.Add(new SelectListItem() { Text = "California", Value = "CA" });
+    stateList.Add(new SelectListItem() { Text = "Colorado", Value = "CO" });
+    stateList.Add(new SelectListItem() { Text = "Connecticut", Value = "CT" });
+    stateList.Add(new SelectListItem() { Text = "Delaware", Value = "DE" });
+    stateList.Add(new SelectListItem() { Text = "Florida", Value = "FL" });
+    stateList.Add(new SelectListItem() { Text = "Georgia", Value = "GA" });
+    stateList.Add(new SelectListItem() { Text = "Hawaii", Value = "HI" });
+    stateList.Add(new SelectListItem() { Text = "Idaho", Value = "ID" });
+    stateList.Add(new SelectListItem() { Text = "Illinois", Value = "IL" });
+    stateList.Add(new SelectListItem() { Text = "Indiana", Value = "IN" });
+    stateList.Add(new SelectListItem() { Text = "Iowa", Value = "IA" });
+    stateList.Add(new SelectListItem() { Text = "Kansas", Value = "KS" });
+    stateList.Add(new SelectListItem() { Text = "Kentucky", Value = "KY" });
+    stateList.Add(new SelectListItem() { Text = "Louisiana", Value = "LA" });
+    stateList.Add(new SelectListItem() { Text = "Maine", Value = "ME" });
+    stateList.Add(new SelectListItem() { Text = "Maryland", Value = "MD" });
+    stateList.Add(new SelectListItem() { Text = "Massachusetts", Value = "MA" });
+    stateList.Add(new SelectListItem() { Text = "Michigan", Value = "MI" });
+    stateList.Add(new SelectListItem() { Text = "Minnesota", Value = "MN" });
+    stateList.Add(new SelectListItem() { Text = "Connecticut", Value = "MS" });
+    stateList.Add(new SelectListItem() { Text = "Missouri", Value = "MO" });
+    stateList.Add(new SelectListItem() { Text = "Montana", Value = "MT" });
+    stateList.Add(new SelectListItem() { Text = "Nebraska", Value = "NE" });
+    stateList.Add(new SelectListItem() { Text = "Nevada", Value = "NV" });
+    stateList.Add(new SelectListItem() { Text = "New Hampshire", Value = "NH" });
+    stateList.Add(new SelectListItem() { Text = "New Jersey", Value = "NJ" });
+    stateList.Add(new SelectListItem() { Text = "New York", Value = "NY" });
+    stateList.Add(new SelectListItem() { Text = "New Mexico", Value = "NM" });
+    stateList.Add(new SelectListItem() { Text = "North Carolina", Value = "NC" });
+    stateList.Add(new SelectListItem() { Text = "North Dakota", Value = "ND" });
+    stateList.Add(new SelectListItem() { Text = "Ohio", Value = "OH" });
+    stateList.Add(new SelectListItem() { Text = "Oklahoma", Value = "OK" });
+    stateList.Add(new SelectListItem() { Text = "Oregon", Value = "OR" });
+    stateList.Add(new SelectListItem() { Text = "Pennsylvania", Value = "PA" });
+    stateList.Add(new SelectListItem() { Text = "Rhode Island", Value = "RI" });
+    stateList.Add(new SelectListItem() { Text = "South Carolina", Value = "SC" });
+    stateList.Add(new SelectListItem() { Text = "South Dakota", Value = "SD" });
+    stateList.Add(new SelectListItem() { Text = "Tennessee", Value = "TN" });
+    stateList.Add(new SelectListItem() { Text = "Texas", Value = "TX" });
+    stateList.Add(new SelectListItem() { Text = "Utah", Value = "UT" });
+    stateList.Add(new SelectListItem() { Text = "Vermont", Value = "VT" });
+    stateList.Add(new SelectListItem() { Text = "Virginia", Value = "VA" });
+    stateList.Add(new SelectListItem() { Text = "Washington", Value = "WA" });
+    stateList.Add(new SelectListItem() { Text = "West Virginia", Value = "WV" });
+    stateList.Add(new SelectListItem() { Text = "Wisconsin", Value = "WI" });
+    stateList.Add(new SelectListItem() { Text = "Wyoming", Value = "WY" });
+
 }
 
 <h2>Edit</h2>
+
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
-        <h4>CustomerAddressViewModels</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+<div class="form-horizontal">
+    <h4>CustomerAddressViewModels</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Customer.ID)
+    @Html.HiddenFor(model => model.Address.ID)
+    <div class="form-group">
+        @Html.LabelFor(model => model.Customer.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Customer.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Customer.FirstName, "", new { @class = "text-danger" })
         </div>
     </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Customer.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Customer.LastName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Customer.LastName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Address.StreetAddress, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Address.StreetAddress, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Address.StreetAddress, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Address.Unit, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Address.Unit, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Address.Unit, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Address.City, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Address.City, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Address.City, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Address.State, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("State", stateList, "Select State", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Address.State, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Address.ZipCode, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Address.ZipCode, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Address.ZipCode, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Customer.PickupDay, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("PickupDay", pickupDayList, "Select Pickup", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Customer.PickupDay, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+</div>
 }
 
 <div>
