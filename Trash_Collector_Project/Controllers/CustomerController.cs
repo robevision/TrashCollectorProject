@@ -18,7 +18,9 @@ namespace Trash_Collector_Project.Controllers
         }
         public ActionResult Index()
         {
-            ViewBag.Name = System.Web.HttpContext.Current.User;
+            var user = User.Identity.GetUserId();
+            var userFirstName = context.Customers.Where(c => c.UserId == user).Select(c => c.FirstName).Single();
+            ViewBag.Name = userFirstName;
             return View();
         }
 
