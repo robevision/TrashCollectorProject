@@ -13,7 +13,7 @@ namespace Trash_Collector_Project.Models
         public int ID { get; set; }
         [Display(Name = "Street Address")]
         public string StreetAddress { get; set; }
-        public int Unit { get; set; }
+        public int? Unit { get; set; }
         public string City { get; set; }
         public string State { get; set; }
         [Display(Name = "Zip Code")]

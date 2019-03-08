@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -27,6 +28,7 @@ namespace Trash_Collector_Project.Controllers
         // GET: Customer/Details/5
         public ActionResult Details(int id)
         {
+
             return View();
         }
 
@@ -89,19 +91,27 @@ namespace Trash_Collector_Project.Controllers
         }
 
         // GET: Customer/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit()
         {
-            return View();
+            CustomerAddressViewModels customerAddress = new CustomerAddressViewModels();
+            var userId = User.Identity.GetUserId();
+            var id = context.Customers.Where(c => c.UserId == userId).Select(c => c.ID).Single();
+            customerAddress.Customer = context.Customers.Where(c => c.ID == id).Single();
+            customerAddress.Address = context.Addresses.Where(a => a.ID == id).Single();
+           
+            return View(customerAddress);
         }
 
         // POST: Customer/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, [Bind(Include = "ID,FirstName,LastName,PickupDay,Pickup")] Customer customer, Address address)
         {
             try
             {
-                // TODO: Add update logic here
-
+                context.Entry(customer).State = System.Data.Entity.EntityState.Modified;
+                context.Entry(address).State = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
+              
                 return RedirectToAction("Index");
             }
             catch
