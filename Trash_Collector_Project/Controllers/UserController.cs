@@ -12,7 +12,7 @@ namespace Trash_Collector_Project.Controllers
     [Authorize]
     public class UserController : Controller
     {
-        public Boolean isAdminUser()
+        public bool IsAdminUser()
         {
             if (User.Identity.IsAuthenticated)
             {
@@ -42,7 +42,7 @@ namespace Trash_Collector_Project.Controllers
 
                 ViewBag.displayMenu = "No";
 
-                if (isAdminUser())
+                if (IsAdminUser())
                 {
                     ViewBag.displayMenu = "Yes";
                 }

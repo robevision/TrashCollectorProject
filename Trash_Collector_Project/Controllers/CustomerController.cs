@@ -18,6 +18,7 @@ namespace Trash_Collector_Project.Controllers
         }
         public ActionResult Index()
         {
+            ViewBag.Name = System.Web.HttpContext.Current.User;
             return View();
         }
 
@@ -36,7 +37,7 @@ namespace Trash_Collector_Project.Controllers
 
         // POST: Customer/Create
         [HttpPost]
-        public ActionResult Create([Bind(Include = "ID,FirstName,LastName,PickupDay,Pickup")] Customer customer)
+        public ActionResult Create([Bind(Include = "ID,FirstName,LastName,PickupDay,Pickup")] Customer customer, Address address)
         {
             var user = User.Identity.GetUserId();
             customer.UserId = user;
@@ -44,6 +45,7 @@ namespace Trash_Collector_Project.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    context.Addresses.Add(address);
                     context.Customers.Add(customer);
                     context.SaveChanges();
                     switch (customer.PickupDay)
