@@ -23,7 +23,7 @@ namespace Trash_Collector_Project.Models
         [Display(Name = "Restart Service")]
         public DateTime? EndBreak { get; set; }
         public bool Paid { get; set; }
-        [Display(Name = "One-Time Complimentary Pick-up")]
+        [Display(Name = "One-Time Additional Complimentary Pick-up")]
         public DateTime? ExtraPickup { get; set; }
         public int PickupTotalFromMonth { get; set; }
         [ForeignKey("ApplicationUser")]
