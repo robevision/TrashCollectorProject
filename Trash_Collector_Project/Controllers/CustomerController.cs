@@ -40,8 +40,8 @@ namespace Trash_Collector_Project.Controllers
         public ActionResult Create([Bind(Include = "ID,FirstName,LastName,PickupDay,Pickup")] Customer customer, Address address)
         {
             var user = User.Identity.GetUserId();
+            address.CustomerId = customer.ID;
             customer.UserId = user;
-            address.CustomerId = customer.UserId;
             try
             {
                 if (ModelState.IsValid)

@@ -207,6 +207,10 @@
     <Compile Include="Migrations\201903072202494_DateTimeTypesNullable.Designer.cs">
       <DependentUpon>201903072202494_DateTimeTypesNullable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903081442544_IntDataTypeAddressMdl.cs" />
+    <Compile Include="Migrations\201903081442544_IntDataTypeAddressMdl.Designer.cs">
+      <DependentUpon>201903081442544_IntDataTypeAddressMdl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs" />
@@ -344,6 +348,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903072202494_DateTimeTypesNullable.resx">
       <DependentUpon>201903072202494_DateTimeTypesNullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903081442544_IntDataTypeAddressMdl.resx">
+      <DependentUpon>201903081442544_IntDataTypeAddressMdl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
