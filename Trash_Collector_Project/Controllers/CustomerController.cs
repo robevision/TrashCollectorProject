@@ -102,10 +102,10 @@ namespace Trash_Collector_Project.Controllers
 
         // GET: Customer/Edit/5
         [HttpGet]
-        public ActionResult Edit()
+        public ActionResult Edit(string userId)
         {
             CustomerAddressViewModels customerAddress = new CustomerAddressViewModels();
-            var userId = User.Identity.GetUserId();
+            userId = User.Identity.GetUserId();
 
             //why is ID not being found!???!?
             var id = context.Customers.Where(c => c.UserId == userId).Select(c => c.ID).Single();
