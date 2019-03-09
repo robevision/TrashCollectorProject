@@ -19,19 +19,29 @@ namespace Trash_Collector_Project.Controllers
         }
         public ActionResult Index()
         {
-            var user = User.Identity.GetUserId();
-            var userFirstName = context.Customers.Where(c => c.UserId == user).Select(c => c.FirstName).Single();
-            ViewBag.Name = userFirstName;
-            return View();
+            try
+            {
+                var user = User.Identity.GetUserId();
+                string userFirstName = context.Customers.Where(c => c.UserId == user).Select(c => c.FirstName).Single();
+                ViewBag.Name = userFirstName;
+                return View();
+            }
+            catch
+            {
+                return View();
+            }
         }
 
         // GET: Customer/Details/5
         public ActionResult Details(int id)
         {
-
+            
             return View();
         }
-
+        public ActionResult Suspend()
+        {
+            return View();
+        }
         // GET: Customer/Create
         public ActionResult Create()
         {
@@ -41,7 +51,7 @@ namespace Trash_Collector_Project.Controllers
 
         // POST: Customer/Create
         [HttpPost]
-        public ActionResult Create([Bind(Include = "ID,FirstName,LastName,PickupDay,Pickup,ExtraPickup")] Customer customer, Address address)
+        public ActionResult Create(Customer customer, Address address)
         {
             var user = User.Identity.GetUserId();
             address.CustomerId = customer.ID;
@@ -91,25 +101,38 @@ namespace Trash_Collector_Project.Controllers
         }
 
         // GET: Customer/Edit/5
+        [HttpGet]
         public ActionResult Edit()
         {
             CustomerAddressViewModels customerAddress = new CustomerAddressViewModels();
             var userId = User.Identity.GetUserId();
+
+            //why is ID not being found!???!?
             var id = context.Customers.Where(c => c.UserId == userId).Select(c => c.ID).Single();
             customerAddress.Customer = context.Customers.Where(c => c.ID == id).Single();
+            var customerId = context.Customers.Where(c => c.ID == customerAddress.Customer.ID).Select(c => c.ID).Single();
             customerAddress.Address = context.Addresses.Where(a => a.CustomerId == id).Single();
             return View(customerAddress);
         }
 
         // POST: Customer/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, [Bind(Include = "ID,FirstName,LastName,PickupDay,Pickup")] CustomerAddressViewModels customerAddress)
+        public ActionResult Edit(CustomerAddressViewModels customerAddress)
         {
             try
             {
-                context.Entry(customerAddress).State = System.Data.Entity.EntityState.Modified;
-                context.SaveChanges();
-              
+                if (ModelState.IsValid)
+                {
+                    //var customer = context.Customers.Where(c => c.ID == customerAddress.Customer.ID).Single();
+                    //customer.FirstName = customerAddress.Customer.FirstName;
+                    //customer.LastName = customerAddress.Customer.LastName;
+                    //customer.ExtraPickup = customerAddress.Customer.ExtraPickup;
+                    context.Entry(customerAddress.Customer).State = System.Data.Entity.EntityState.Modified;
+                    context.SaveChanges();
+                    context.Entry(customerAddress.Address).State = System.Data.Entity.EntityState.Modified;
+                    context.SaveChanges();
+
+                }
                 return RedirectToAction("Index");
             }
             catch
