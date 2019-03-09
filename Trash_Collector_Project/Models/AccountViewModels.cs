@@ -53,8 +53,8 @@ namespace Trash_Collector_Project.Models
         [EmailAddress]
         public string Email { get; set; }
         //[Required]
-        //[Display(Name = "User Name")]
-        //public string UserName { get; set; }
+        [Display(Name = "User Name")]
+        public string UserName { get; set; }
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
