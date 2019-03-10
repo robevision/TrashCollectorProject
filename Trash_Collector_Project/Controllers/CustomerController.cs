@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -38,15 +39,38 @@ namespace Trash_Collector_Project.Controllers
             
             return View();
         }
+        //GET: Customer/Suspend
         public ActionResult Suspend()
         {
-        
-                CustomerAddressViewModels customerAddress = new CustomerAddressViewModels();
-               var userId = User.Identity.GetUserId();
+            var userId = User.Identity.GetUserId();
 
-            var customer = context.Customers.Where(c => c.UserId == userId).Select(c => c).Single();
+            Customer customer = context.Customers.Where(c => c.UserId == userId).Select(c => c).Single();
+            return View(customer);
+
+        }
+
+        // POST: Customer/Suspend
+        [HttpPost]
+        public ActionResult Suspend(Customer customer)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var id = customer.ID;
+                    var updatedCustomers = context.Customers.Where(c => c.ID == id).Select(c => c).Single();
+                    updatedCustomers.StartBreak = customer.StartBreak;
+                    updatedCustomers.EndBreak = customer.EndBreak;
+                    context.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+
                 return View(customer);
-         
+            }
+            catch
+            {
+                return View();
+            }
         }
         // GET: Customer/Create
         public ActionResult Create()
@@ -110,22 +134,19 @@ namespace Trash_Collector_Project.Controllers
         [HttpGet]
         public ActionResult Edit(string userId)
         {
-            try
-            {
+      
                 CustomerAddressViewModels customerAddress = new CustomerAddressViewModels();
                 userId = User.Identity.GetUserId();
-
                 //why is ID not being found!???!?
                 var id = context.Customers.Where(c => c.UserId == userId).Select(c => c.ID).Single();
                 customerAddress.Customer = context.Customers.Where(c => c.ID == id).Single();
                 var customerId = context.Customers.Where(c => c.ID == customerAddress.Customer.ID).Select(c => c.ID).Single();
                 customerAddress.Address = context.Addresses.Where(a => a.CustomerId == id).Single();
                 return View(customerAddress);
-            }
-            catch
-            {
-                return View();
-            }
+            
+           
+               
+            
             
         }
 
@@ -137,7 +158,7 @@ namespace Trash_Collector_Project.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    //var customer = context.Customers.Where(c => c.ID == customerAddress.Customer.ID).Single();
+                    //Customer customer = context.Customers.Where(c => c.ID == customerAddress.Customer.ID).Single();
                     //customer.FirstName = customerAddress.Customer.FirstName;
                     //customer.LastName = customerAddress.Customer.LastName;
                     //customer.ExtraPickup = customerAddress.Customer.ExtraPickup;
