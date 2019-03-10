@@ -104,15 +104,23 @@ namespace Trash_Collector_Project.Controllers
         [HttpGet]
         public ActionResult Edit(string userId)
         {
-            CustomerAddressViewModels customerAddress = new CustomerAddressViewModels();
-            userId = User.Identity.GetUserId();
+            try
+            {
+                CustomerAddressViewModels customerAddress = new CustomerAddressViewModels();
+                userId = User.Identity.GetUserId();
 
-            //why is ID not being found!???!?
-            var id = context.Customers.Where(c => c.UserId == userId).Select(c => c.ID).Single();
-            customerAddress.Customer = context.Customers.Where(c => c.ID == id).Single();
-            var customerId = context.Customers.Where(c => c.ID == customerAddress.Customer.ID).Select(c => c.ID).Single();
-            customerAddress.Address = context.Addresses.Where(a => a.CustomerId == id).Single();
-            return View(customerAddress);
+                //why is ID not being found!???!?
+                var id = context.Customers.Where(c => c.UserId == userId).Select(c => c.ID).Single();
+                customerAddress.Customer = context.Customers.Where(c => c.ID == id).Single();
+                var customerId = context.Customers.Where(c => c.ID == customerAddress.Customer.ID).Select(c => c.ID).Single();
+                customerAddress.Address = context.Addresses.Where(a => a.CustomerId == id).Single();
+                return View(customerAddress);
+            }
+            catch
+            {
+                return View();
+            }
+            
         }
 
         // POST: Customer/Edit/5
