@@ -40,7 +40,13 @@ namespace Trash_Collector_Project.Controllers
         }
         public ActionResult Suspend()
         {
-            return View();
+        
+                CustomerAddressViewModels customerAddress = new CustomerAddressViewModels();
+               var userId = User.Identity.GetUserId();
+
+            var customer = context.Customers.Where(c => c.UserId == userId).Select(c => c).Single();
+                return View(customer);
+         
         }
         // GET: Customer/Create
         public ActionResult Create()
