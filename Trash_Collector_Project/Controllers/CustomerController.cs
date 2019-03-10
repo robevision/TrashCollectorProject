@@ -34,15 +34,24 @@ namespace Trash_Collector_Project.Controllers
         }
 
         // GET: Customer/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details()
         {
-            
-            return View();
+            try
+            {
+                string userId = User.Identity.GetUserId();
+                return View(context.Customers.Where(c => c.UserId == userId).Single());
+            }
+            catch
+            {
+                return RedirectToAction("Index");
+
+            }
+          
         }
         //GET: Customer/Suspend
         public ActionResult Suspend()
         {
-            var userId = User.Identity.GetUserId();
+            string userId = User.Identity.GetUserId();
 
             Customer customer = context.Customers.Where(c => c.UserId == userId).Select(c => c).Single();
             return View(customer);
@@ -57,8 +66,8 @@ namespace Trash_Collector_Project.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var id = customer.ID;
-                    var updatedCustomers = context.Customers.Where(c => c.ID == id).Select(c => c).Single();
+                    int id = customer.ID;
+                    Customer updatedCustomers = context.Customers.Where(c => c.ID == id).Select(c => c).Single();
                     updatedCustomers.StartBreak = customer.StartBreak;
                     updatedCustomers.EndBreak = customer.EndBreak;
                     context.SaveChanges();
