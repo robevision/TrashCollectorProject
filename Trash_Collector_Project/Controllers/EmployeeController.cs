@@ -21,8 +21,11 @@ namespace Trash_Collector_Project.Controllers
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
             var employeeZipCode = context.Employees.Select(e => e.ZipCode).Single();
-            customerAddresses.Customers = context.Customers.ToList();
-            customerAddresses.Addresses = context.Addresses.ToList();
+            customerAddresses.Customers = context.Customers.Where(c=>c.Pickup == true).ToList();
+            if(customerAddresses.Customers != null)
+            {
+                customerAddresses.Addresses = context.Addresses.ToList();
+            }
             try
             {
                 var customerswithZipCode = customerAddresses.Addresses.Where(a => a.ZipCode == employeeZipCode).Select(a => a.Customer);
