@@ -23,28 +23,36 @@ namespace Trash_Collector_Project.Controllers
             var employeeZipCode = context.Employees.Select(e => e.ZipCode).Single();
             customerAddresses.Customers = context.Customers.ToList();
             customerAddresses.Addresses = context.Addresses.ToList();
-            var customerswithZipCode = customerAddresses.Addresses.Where(a => a.ZipCode == employeeZipCode).Select(a => a.Customer);
-            var customers = from c in customerswithZipCode select c;
-            if (!String.IsNullOrEmpty(searchString))
+            try
             {
-                customers = customers.Where(c => c.PickupDay.Contains(searchString));
+                var customerswithZipCode = customerAddresses.Addresses.Where(a => a.ZipCode == employeeZipCode).Select(a => a.Customer);
+                var customers = from c in customerswithZipCode select c;
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    customers = customers.Where(c => c.PickupDay.Contains(searchString));
+                }
+                switch (sortOrder)
+                {
+                    case "name_desc":
+                        customers = customers.OrderByDescending(c => c.LastName);
+                        break;
+                    case "Date":
+                        customers = customers.OrderBy(c => c.PickupDay);
+                        break;
+                    case "date_desc":
+                        customers = customers.OrderByDescending(c => c.PickupDay);
+                        break;
+                    default:
+                        customers = customers.OrderBy(c => c.LastName);
+                        break;
+                }
+                return View(customers.ToList());
             }
-            switch (sortOrder)
+            catch
             {
-                case "name_desc":
-                    customers = customers.OrderByDescending(c => c.LastName);
-                    break;
-                case "Date":
-                    customers = customers.OrderBy(c => c.PickupDay);
-                    break;
-                case "date_desc":
-                    customers = customers.OrderByDescending(c => c.PickupDay);
-                    break;
-                default:
-                    customers = customers.OrderBy(c => c.LastName);
-                    break;
+                return View();
             }
-            return View(customers.ToList());
+           
         }
 
         // GET: Employee/Details/5
