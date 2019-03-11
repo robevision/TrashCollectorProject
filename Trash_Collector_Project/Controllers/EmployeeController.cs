@@ -21,14 +21,20 @@ namespace Trash_Collector_Project.Controllers
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
             var employeeZipCode = context.Employees.Select(e => e.ZipCode).Single();
-            customerAddresses.Customers = context.Customers.Where(c=>c.Pickup == true).ToList();
+            var customerIds = context.Customers.Where(c=>c.Pickup == true).Select(cus => cus.ID);
+            customerAddresses.Customers = context.Customers.Where(c => c.Pickup == true).ToList();
+            IEnumerable<Address> addresses = new List<Address>();
+            addresses = context.Addresses.Select(a=>a).ToList();
             if(customerAddresses.Customers != null)
             {
-                customerAddresses.Addresses = context.Addresses.ToList();
+                foreach(int id in customerIds)
+                {
+                    customerAddresses.Addresses.Add(addresses.SingleOrDefault(a => a.CustomerId == id));
+                }  
             }
             try
             {
-                var customerswithZipCode = customerAddresses.Addresses.Where(a => a.ZipCode == employeeZipCode).Select(a => a.Customer);
+                var customerswithZipCode = customerAddresses.Addresses.Where(a => a.ZipCode == employeeZipCode).Select(a => a.Customer).ToList();
                 var customers = from c in customerswithZipCode select c;
                 if (!String.IsNullOrEmpty(searchString))
                 {
