@@ -3,19 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Trash_Collector_Project.Models;
 
 namespace Trash_Collector_Project.Controllers
 {
     public class EmployeeController : Controller
     {
+        public ApplicationDbContext context;
+        public EmployeeController()
+        {
+            context = new ApplicationDbContext();
+        }
         // GET: Employee
         public ActionResult Index()
         {
-            return View();
+            var customersList = context.Customers.ToList();
+            return View(context.Customers.ToList());
         }
 
         // GET: Employee/Details/5
-        public ActionResult Details(int id)
+        [HttpGet]
+        public ActionResult Details()
         {
             return View();
         }

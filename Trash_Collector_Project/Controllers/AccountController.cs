@@ -81,7 +81,19 @@ namespace Trash_Collector_Project.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    var userId = User.Identity.GetUserId();
+                    var loggedInUser = context.Users.Select(u => u.Id == userId);
+
+                    //var test = context.Employees.Where().singleorDefault();
+                    //if(true)
+                    //{
+
+                    //}
+                    //var usersInRole = context.Users.Where(u =>
+                    //u.Roles.Join(context.Roles, user => user.RoleId,
+                    //role => role.Id, (user, role) => user).Where(usr => usr.UserId == userId);
+                    //var currentRole=context.Users.Where(u => u == loggedInUser).Select(u => u);        
+                    return RedirectToAction("Index", "Employee" /*currentRole.ToString()*/);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
