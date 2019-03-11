@@ -81,8 +81,8 @@ namespace Trash_Collector_Project.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    var userId = User.Identity.GetUserId();
-                    var loggedInUser = context.Users.Select(u => u.Id == userId);
+                    //var userId = User.Identity.GetUserId();
+                    //User EMAIL
 
                     //var test = context.Employees.Where().singleorDefault();
                     //if(true)
@@ -92,7 +92,7 @@ namespace Trash_Collector_Project.Controllers
                     //var usersInRole = context.Users.Where(u =>
                     //u.Roles.Join(context.Roles, user => user.RoleId,
                     //role => role.Id, (user, role) => user).Where(usr => usr.UserId == userId);
-                    //var currentRole=context.Users.Where(u => u == loggedInUser).Select(u => u);        
+                    //var currentRole = context.Users.Where(u => u == loggedInUser).Select(u => u);
                     return RedirectToAction("Index", "Employee" /*currentRole.ToString()*/);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -180,11 +180,11 @@ namespace Trash_Collector_Project.Controllers
                     await this.UserManager.AddToRoleAsync(user.Id, model.UserRoles);
                     if (model.UserRoles == "Customer")
                     {
-                        return RedirectToAction("Index", "Customer");
+                        return RedirectToAction("Create", "Customer");
                     }
                     if (model.UserRoles == "Employee")
                     {
-                        return RedirectToAction("Index", "Employee");
+                        return RedirectToAction("Create", "Employee");
                     }         
                 }
                 ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin")).ToList(), "Name", "Name");

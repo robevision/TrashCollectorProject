@@ -9,6 +9,9 @@ namespace Trash_Collector_Project.Models
     {
         public Customer Customer {get; set;}
         public Address Address { get; set; }
+
+        public List<Customer> Customers { get; set;}
+        public List<Address> Addresses { get; set;}
         
     }
 }

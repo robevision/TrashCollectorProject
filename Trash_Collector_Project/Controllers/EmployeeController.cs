@@ -10,6 +10,7 @@ namespace Trash_Collector_Project.Controllers
     public class EmployeeController : Controller
     {
         public ApplicationDbContext context;
+        public CustomerAddressViewModels customerAddresses = new CustomerAddressViewModels();
         public EmployeeController()
         {
             context = new ApplicationDbContext();
@@ -19,7 +20,9 @@ namespace Trash_Collector_Project.Controllers
         {
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
-            var customers = from c in context.Customers select c;
+            var employeeZipCode = context.Employees.Select(e => e.ZipCode).Single();
+            var customerswithZipCode = customerAddresses.Addresses.Where(a => a.ZipCode == employeeZipCode).Select(a => a.Customer);
+            var customers = from c in customerswithZipCode select c;
             if (!String.IsNullOrEmpty(searchString))
             {
                 customers = customers.Where(c => c.PickupDay.Contains(searchString));
@@ -52,16 +55,21 @@ namespace Trash_Collector_Project.Controllers
         // GET: Employee/Create
         public ActionResult Create()
         {
+            ViewBag.ID = new SelectList(context.Employees, "Id", "ZipCode");
             return View();
         }
 
         // POST: Employee/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Employee employee)
         {
             try
             {
-                // TODO: Add insert logic here
+                if (ModelState.IsValid)
+                {
+                    context.Employees.Add(employee);
+                    context.SaveChanges();
+                }
 
                 return RedirectToAction("Index");
             }
