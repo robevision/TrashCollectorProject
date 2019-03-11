@@ -10,10 +10,11 @@ namespace Trash_Collector_Project.Controllers
     public class EmployeeController : Controller
     {
         public ApplicationDbContext context;
-        public CustomerAddressViewModels customerAddresses = new CustomerAddressViewModels();
+        public CustomerAddressViewModels customerAddresses; 
         public EmployeeController()
         {
             context = new ApplicationDbContext();
+            customerAddresses = new CustomerAddressViewModels();
         }
         // GET: Employee
         public ActionResult Index(string sortOrder, string searchString)
@@ -21,21 +22,29 @@ namespace Trash_Collector_Project.Controllers
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
             var employeeZipCode = context.Employees.Select(e => e.ZipCode).Single();
-            var customerIds = context.Customers.Where(c=>c.Pickup == true).Select(cus => cus.ID);
+            List <int> customerIds = context.Customers.Where(c=>c.Pickup == true).Select(cus => cus.ID).ToList();
             customerAddresses.Customers = context.Customers.Where(c => c.Pickup == true).ToList();
+            customerAddresses.Addresses = new List<Address>();
             IEnumerable<Address> addresses = new List<Address>();
             addresses = context.Addresses.Select(a=>a).ToList();
             if(customerAddresses.Customers != null)
             {
                 foreach(int id in customerIds)
                 {
-                    customerAddresses.Addresses.Add(addresses.SingleOrDefault(a => a.CustomerId == id));
+                    var verdict = addresses.Where(a => a.CustomerId == id).Where(x => x != null).SingleOrDefault();
+                    customerAddresses.Addresses.Add(verdict);
+                    //if (verdict.Any() && verdict[0] != null)
+                    //{
+                        //customerAddresses.Addresses = verdict;
+                    //    customerAddresses.Addresses.Add(verdict[0]);
+                    //}   
                 }  
             }
             try
             {
-                var customerswithZipCode = customerAddresses.Addresses.Where(a => a.ZipCode == employeeZipCode).Select(a => a.Customer).ToList();
-                var customers = from c in customerswithZipCode select c;
+                var customersWithZipCode = customerAddresses.Addresses.Where(a => a.ZipCode == employeeZipCode).Select(a => a.Customer);
+                //var filteredCustomers = context.Customers.Where(c => c == customersWithZipCode);  
+                var customers = from c in customersWithZipCode select c;
                 if (!String.IsNullOrEmpty(searchString))
                 {
                     customers = customers.Where(c => c.PickupDay.Contains(searchString));
@@ -55,13 +64,13 @@ namespace Trash_Collector_Project.Controllers
                         customers = customers.OrderBy(c => c.LastName);
                         break;
                 }
-                return View(customers.ToList());
+                return View(customers);
             }
             catch
             {
-                return View();
+                return RedirectToAction("Index", "Home");
             }
-           
+
         }
 
         // GET: Employee/Details/5
