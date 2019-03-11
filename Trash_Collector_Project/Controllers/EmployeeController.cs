@@ -33,17 +33,11 @@ namespace Trash_Collector_Project.Controllers
                 {
                     var verdict = addresses.Where(a => a.CustomerId == id).Where(x => x != null).SingleOrDefault();
                     customerAddresses.Addresses.Add(verdict);
-                    //if (verdict.Any() && verdict[0] != null)
-                    //{
-                        //customerAddresses.Addresses = verdict;
-                    //    customerAddresses.Addresses.Add(verdict[0]);
-                    //}   
                 }  
             }
             try
             {
                 var customersWithZipCode = customerAddresses.Addresses.Where(a => a.ZipCode == employeeZipCode).Select(a => a.Customer);
-                //var filteredCustomers = context.Customers.Where(c => c == customersWithZipCode);  
                 var customers = from c in customersWithZipCode select c;
                 if (!String.IsNullOrEmpty(searchString))
                 {
