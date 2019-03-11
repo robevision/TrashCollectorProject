@@ -146,7 +146,6 @@ namespace Trash_Collector_Project.Controllers
       
                 CustomerAddressViewModels customerAddress = new CustomerAddressViewModels();
                 userId = User.Identity.GetUserId();
-                //why is ID not being found!???!?
                 var id = context.Customers.Where(c => c.UserId == userId).Select(c => c.ID).Single();
                 customerAddress.Customer = context.Customers.Where(c => c.ID == id).Single();
                 var customerId = context.Customers.Where(c => c.ID == customerAddress.Customer.ID).Select(c => c.ID).Single();

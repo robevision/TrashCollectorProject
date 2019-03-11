@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -69,9 +70,18 @@ namespace Trash_Collector_Project.Controllers
 
         // GET: Employee/Details/5
         [HttpGet]
+        public ActionResult Details(int id)
+        {
+            CustomerAddressViewModels customerAddress = new CustomerAddressViewModels();
+            customerAddress.Customer = context.Customers.Where(c => c.ID == id).Select(c=>c).Single();
+            var customerId = context.Customers.Where(c => c.ID == customerAddress.Customer.ID).Select(c => c.ID).Single();
+            customerAddress.Address = context.Addresses.Where(a => a.CustomerId == id).Single();
+            return View(customerAddress);
+        }
+        [HttpPost]
         public ActionResult Details()
         {
-            return View();
+            return RedirectToAction("Index");
         }
 
         // GET: Employee/Create
@@ -102,9 +112,15 @@ namespace Trash_Collector_Project.Controllers
         }
 
         // GET: Employee/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string userId)
         {
-            return View();
+            CustomerAddressViewModels customerAddress = new CustomerAddressViewModels();
+            userId = User.Identity.GetUserId();
+            var id = context.Customers.Where(c => c.UserId == userId).Select(c => c.ID).Single();
+            customerAddress.Customer = context.Customers.Where(c => c.ID == id).Single();
+            var customerId = context.Customers.Where(c => c.ID == customerAddress.Customer.ID).Select(c => c.ID).Single();
+            customerAddress.Address = context.Addresses.Where(a => a.CustomerId == id).Single();
+            return View(customerAddress);
         }
 
         // POST: Employee/Edit/5

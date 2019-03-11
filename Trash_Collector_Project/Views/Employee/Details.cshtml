@@ -1,98 +1,48 @@
-﻿@model Trash_Collector_Project.Models.Customer
+﻿@model Trash_Collector_Project.Models.CustomerAddressViewModels
 
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Review Before Resolving Pickup</h2>
 
 <div>
-    <h4>Customer</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
+        @*<dt>
+            @Html.DisplayNameFor(model => model.Customer.FirstName)
         </dt>
-
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.LastName)
+        </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.Address.StreetAddress)
+        </dt>*@
         <dd>
-            @Html.DisplayFor(model => model.FirstName)
+            @Html.DisplayFor(model => model.Customer.FirstName)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.LastName)
+            @Html.DisplayFor(model => model.Customer.LastName)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PickupDay)
-        </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.PickupDay)
+            @Html.DisplayFor(model => model.Address.StreetAddress)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Pickup)
-        </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.Pickup)
+            @Html.DisplayFor(model => model.Address.Unit)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.StartBreak)
-        </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.StartBreak)
+            @Html.DisplayFor(model => model.Address.City)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EndBreak)
-        </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.EndBreak)
+            @Html.DisplayFor(model => model.Address.State)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Paid)
-        </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.Paid)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ExtraPickup)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ExtraPickup)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PickupTotalFromMonth)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PickupTotalFromMonth)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UserId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UserId)
+            @Html.DisplayFor(model => model.Address.ZipCode)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    <h3>@Html.ActionLink("Resolve Pickup", "Edit", new { /* id = Model.PrimaryKey */ })</h3> |
     @Html.ActionLink("Back to List", "Index")
 </p>
