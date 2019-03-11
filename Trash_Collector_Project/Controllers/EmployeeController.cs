@@ -22,7 +22,7 @@ namespace Trash_Collector_Project.Controllers
             var customers = from c in context.Customers select c;
             if (!String.IsNullOrEmpty(searchString))
             {
-                customers = customers.Where(c => c.LastName.Contains(searchString) || c.FirstName.Contains(searchString));
+                customers = customers.Where(c => c.PickupDay.Contains(searchString));
             }
             switch (sortOrder)
             {
