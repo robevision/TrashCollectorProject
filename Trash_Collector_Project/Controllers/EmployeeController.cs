@@ -23,7 +23,8 @@ namespace Trash_Collector_Project.Controllers
         {
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
-            var employeeZipCode = context.Employees.Select(e => e.ZipCode).Single();
+            string userId = User.Identity.GetUserId();
+            var employeeZipCode = context.Employees.Where(e=>e.UserId == userId).Select(e => e.ZipCode).SingleOrDefault();
             List <int> customerIds = context.Customers.Where(c=>c.Pickup == true).Select(cus => cus.ID).ToList();
             customerAddresses.Customers = context.Customers.Where(c => c.Pickup == true).ToList();
             customerAddresses.Addresses = new List<Address>();
