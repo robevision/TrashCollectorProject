@@ -81,19 +81,13 @@ namespace Trash_Collector_Project.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    //var userId = User.Identity.GetUserId();
                     //User EMAIL
-
-                    //var test = context.Employees.Where().singleorDefault();
-                    //if(true)
-                    //{
-
-                    //}
-                    //var usersInRole = context.Users.Where(u =>
-                    //u.Roles.Join(context.Roles, user => user.RoleId,
-                    //role => role.Id, (user, role) => user).Where(usr => usr.UserId == userId);
-                    //var currentRole = context.Users.Where(u => u == loggedInUser).Select(u => u);
-                    return RedirectToAction("Index", "Employee" /*currentRole.ToString()*/);
+                    var user = context.Users.Where(u => u.Email == model.Email);
+                    var userRole = user.Select(u => u.Roles).Single();
+                    var roleId = userRole.Select(r => r.RoleId).Single();
+                    var role = context.Roles.Where(r => r.Id == roleId).Select(r=>r.Name).Single();
+                    var roleText = role.ToString();
+                    return RedirectToAction("Index", roleText);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:

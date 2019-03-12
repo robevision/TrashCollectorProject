@@ -8,6 +8,7 @@ using Trash_Collector_Project.Models;
 
 namespace Trash_Collector_Project.Controllers
 {
+    [Authorize(Roles ="Employee")]
     public class EmployeeController : Controller
     {
         public ApplicationDbContext context;

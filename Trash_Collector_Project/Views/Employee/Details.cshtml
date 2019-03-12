@@ -43,6 +43,6 @@
     </dl>
 </div>
 <p>
-    <h3>@Html.ActionLink("Resolve Pickup", "Edit", "Employee", null) </h3> |
+    <h3>@Html.ActionLink("Resolve Pickup", "Edit", "Employee", new { id = Model.Customer.ID }, null) </h3> |
     @Html.ActionLink("Back to List", "Index")
 </p>
