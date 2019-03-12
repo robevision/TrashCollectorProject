@@ -80,6 +80,24 @@ namespace Trash_Collector_Project.Controllers
                     updatedCustomers.StartBreak = customer.StartBreak;
                     updatedCustomers.EndBreak = customer.EndBreak;
                     context.SaveChanges();
+                    if(DateTime.Now >= customer.StartBreak && DateTime.Now <= customer.EndBreak)
+                    {
+                        customer.Pickup = false;
+
+                    }
+                    string day = DateTime.Today.DayOfWeek.ToString();
+                    if (DateTime.Now < customer.StartBreak && DateTime.Now > customer.EndBreak && day == customer.PickupDay)
+                    {
+                        customer.Pickup = true;
+                    }
+                    var startText = customer.StartBreak.ToString();
+                    //DateTime start = Convert.ToInt16(startText);
+                    //List<DateTime?> dateList = new List<DateTime?>();while (start.)
+                    //foreach (DateTime day in start.(customer.EndBreak))
+                    //{
+
+                    //}
+                    
                     return RedirectToAction("Index");
                 }
 

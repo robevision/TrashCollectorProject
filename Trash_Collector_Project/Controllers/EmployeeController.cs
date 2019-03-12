@@ -121,10 +121,13 @@ namespace Trash_Collector_Project.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                   var customer = context.Customers.Where(c => c.ID == id);
                    var needsPickup = context.Customers.Where(c => c.ID == id).Select(c => c.Pickup).SingleOrDefault();
                    var pickupTotal = context.Customers.Where(c => c.ID == id).Select(c => c.PickupTotalFromMonth).SingleOrDefault();
                    pickupTotal = pickupTotal++;
                    needsPickup = false;
+                   context.Entry(customer).State = System.Data.Entity.EntityState.Modified;
+                   context.SaveChanges();
 
                 }
 
