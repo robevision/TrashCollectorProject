@@ -39,7 +39,16 @@ namespace Trash_Collector_Project.Controllers
             try
             {
                 string userId = User.Identity.GetUserId();
-                return View(context.Customers.Where(c => c.UserId == userId).Single());
+                var user = context.Customers.Where(c => c.UserId == userId).Single();
+                if (user.PickupTotalFromMonth != 0)
+                {
+                    ViewBag.amount = 30 * user.PickupTotalFromMonth;
+                }
+                else
+                {
+                    ViewBag.amount = 0;
+                }
+                return View(user);
             }
             catch
             {

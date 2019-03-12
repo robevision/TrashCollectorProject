@@ -78,12 +78,7 @@ namespace Trash_Collector_Project.Controllers
             customerAddress.Address = context.Addresses.Where(a => a.CustomerId == id).Single();
             return View(customerAddress);
         }
-        [HttpPost]
-        public ActionResult Details()
-        {
-            return RedirectToAction("Index");
-        }
-
+       
         // GET: Employee/Create
         public ActionResult Create()
         {
@@ -112,24 +107,25 @@ namespace Trash_Collector_Project.Controllers
         }
 
         // GET: Employee/Edit/5
-        public ActionResult Edit(string userId)
-        {
-            CustomerAddressViewModels customerAddress = new CustomerAddressViewModels();
-            userId = User.Identity.GetUserId();
-            var id = context.Customers.Where(c => c.UserId == userId).Select(c => c.ID).Single();
-            customerAddress.Customer = context.Customers.Where(c => c.ID == id).Single();
-            var customerId = context.Customers.Where(c => c.ID == customerAddress.Customer.ID).Select(c => c.ID).Single();
-            customerAddress.Address = context.Addresses.Where(a => a.CustomerId == id).Single();
-            return View(customerAddress);
-        }
+        //public ActionResult Edit()
+        //{
+        //    return View();
+        //}
 
         // POST: Employee/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+      
+        public ActionResult Edit(int id)
         {
             try
             {
-                // TODO: Add update logic here
+                if (ModelState.IsValid)
+                {
+                   var needsPickup = context.Customers.Where(c => c.ID == id).Select(c => c.Pickup).SingleOrDefault();
+                   var pickupTotal = context.Customers.Where(c => c.ID == id).Select(c => c.PickupTotalFromMonth).SingleOrDefault();
+                   pickupTotal = pickupTotal++;
+                   needsPickup = false;
+
+                }
 
                 return RedirectToAction("Index");
             }
