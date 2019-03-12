@@ -3,21 +3,30 @@
 @{
     ViewBag.Title = "Details";
 }
+@*<head>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9baxnHzXQGxrJm3dHBcThEM8JZRjwgZk&callback=initMap"
+            type="text/javascript"></script>
+</head>*@
 
 <h2>Review Before Resolving Pickup</h2>
-
+@*<div id="modal-map2" style="height: 76%; width: 77%; position: absolute; overflow: hidden;"></div>
+<script>
+    var uluru = { lat: -25.363, lng: 131.044 };
+    var map = new google.maps.Map(document.getElementById('modal-map2'),
+    {
+    zoom: 13,
+    center: uluru,
+    mapTypeId: google.maps.MapTypeId.HYBRID,
+    zoomControl: true,
+    zoomControlOptions: { position: google.maps.ControlPosition.LEFT_BOTTOM },
+    streetViewControlOptions: { position: google.maps.ControlPosition.LEFT_BOTTOM },
+    mapTypeControlOptions: { position: google.maps.ControlPosition.RIGHT_CENTER },
+    });
+    </script>*@
 <div>
     <hr />
     <dl class="dl-horizontal">
-        @*<dt>
-            @Html.DisplayNameFor(model => model.Customer.FirstName)
-        </dt>
-        <dt>
-            @Html.DisplayNameFor(model => model.Customer.LastName)
-        </dt>
-        <dt>
-            @Html.DisplayNameFor(model => model.Address.StreetAddress)
-        </dt>*@
         <dd>
             @Html.DisplayFor(model => model.Customer.FirstName)
         </dd>

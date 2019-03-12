@@ -77,6 +77,7 @@ namespace Trash_Collector_Project.Controllers
             customerAddress.Customer = context.Customers.Where(c => c.ID == id).Select(c=>c).Single();
             var customerId = context.Customers.Where(c => c.ID == customerAddress.Customer.ID).Select(c => c.ID).Single();
             customerAddress.Address = context.Addresses.Where(a => a.CustomerId == id).Single();
+            //Add Google Map API
             return View(customerAddress);
         }
        
@@ -126,7 +127,7 @@ namespace Trash_Collector_Project.Controllers
                    var pickupTotal = context.Customers.Where(c => c.ID == id).Select(c => c.PickupTotalFromMonth).SingleOrDefault();
                    pickupTotal = pickupTotal++;
                    needsPickup = false;
-                   context.Entry(customer).State = System.Data.Entity.EntityState.Modified;
+                   //context.Entry(customer).State = System.Data.Entity.EntityState.Modified;
                    context.SaveChanges();
 
                 }
@@ -139,26 +140,5 @@ namespace Trash_Collector_Project.Controllers
             }
         }
 
-        // GET: Employee/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Employee/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }
