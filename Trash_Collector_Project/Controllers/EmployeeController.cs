@@ -8,7 +8,7 @@ using Trash_Collector_Project.Models;
 
 namespace Trash_Collector_Project.Controllers
 {
-    [Authorize(Roles ="Employee")]
+    [Authorize]
     public class EmployeeController : Controller
     {
         public ApplicationDbContext context;
@@ -19,6 +19,7 @@ namespace Trash_Collector_Project.Controllers
             customerAddresses = new CustomerAddressViewModels();
         }
         // GET: Employee
+        [Authorize(Roles = "Employee")]
         public ActionResult Index(string sortOrder, string searchString)
         {
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
